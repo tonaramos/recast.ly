@@ -6,8 +6,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "concurrently --kill-others \"npm run babel\" \"npm run app\" \"npm run test\"",
-    "babel": "babel-watch src/index.js",
+    "dev": "concurrently \"npm run babel\" \"npm run app\" \"npm run test\"",
+    "babel": "babel . --watch --out-dir compiled --presets=env,react --ignore=node_modules,compiled --source-maps inline",
     "app": "live-server --open=./index.html --port=8082",
     "test": "live-server --open=./SpecRunner.html --port=8081",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"
@@ -23,7 +23,6 @@
     "babel-cli": "^6.6.5",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.5.0",
-    "babel-watch": "^2.0.7",
     "chai": "^3.5.0",
     "concurrently": "^3.5.1",
     "mocha": "2.3.3",
