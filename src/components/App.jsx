@@ -1,9 +1,14 @@
 class App extends React.Component {
   constructor (props) {
     super(props);
-    
-    console.log('Props', this.props.data);
 
+    // this.props.youtubeData({
+    //   key: window.YOUTUBE_API_KEY,
+    //   maxResults: '5',
+    //   part: 'snippet',
+    //   q: 'surfing'
+    // });
+    
     this.state = {
       videoData: this.props.data,
       videoPlaying: this.props.data[0]
@@ -11,15 +16,26 @@ class App extends React.Component {
   }
   
   handleClick(video) {
+    console.log(video);
     this.setState({ videoPlaying: video});
+    
   }
- 
+
+  handleSearch(query) {
+    this.props.youtubeData({
+      key: window.YOUTUBE_API_KEY,
+      maxResults: '5',
+      part: 'snippet',
+      q: query
+    }, (data) => this.setState({ videoData: data }) );
+  }
+
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search youtubeData={this.props.youtubeData} onClick={(query) => this.handleSearch(query)} />
           </div>
         </nav>
         <div className="row">
@@ -28,6 +44,7 @@ class App extends React.Component {
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.videoData} onClick={(video) => this.handleClick(video)} />
+            
           </div>
         </div>
       </div>
