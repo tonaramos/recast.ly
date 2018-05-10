@@ -11,13 +11,11 @@ class App extends React.Component {
   }
   
   handleClick(video) {
-    console.log(video);
-    this.setState({ videoPlaying: video });
-    
+    this.setState({ videoPlaying: video });    
   }
 
   handleSearch(query) {
-    this.props.youtubeData({
+    this.props.searchYouTube({
       format: '5',
       key: window.YOUTUBE_API_KEY,
       maxResults: '5',
@@ -31,9 +29,9 @@ class App extends React.Component {
 
   render() {
     
-    let searchComponent = null;
-    let videoPlayerComponent = null;
-    let videoListComponent = null;
+    let searchComponent = ( <div className="search-bar form-inline"></div> );
+    let videoPlayerComponent = ( <div className="video-player"></div> );
+    let videoListComponent = ( <div className="video-list"></div> );
     if ( this.state.videoData.length > 0 ) {
       searchComponent = <Search youtubeData={this.props.youtubeData} onClick={(query) => this.handleSearch(query)} />;
       videoPlayerComponent = <VideoPlayer video={this.state.videoPlaying} />;
