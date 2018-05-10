@@ -2,13 +2,6 @@ class App extends React.Component {
   constructor (props) {
     super(props);
 
-    // this.props.youtubeData({
-    //   key: window.YOUTUBE_API_KEY,
-    //   maxResults: '5',
-    //   part: 'snippet',
-    //   q: 'surfing'
-    // });
-    
     this.state = {
       videoData: this.props.data,
       videoPlaying: this.props.data[0]
@@ -49,7 +42,11 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }  
+  }
+  
+  componentDidMount() {
+    this.handleSearch('childish gambino');
+  }
 }
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
