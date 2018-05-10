@@ -10,7 +10,7 @@ var App = (props) => (
         <VideoPlayer />
       </div>
       <div className="col-md-5">
-        <VideoList data={props.data} />
+        <VideoList videos={props.data.slice(-1)} />
       </div>
     </div>
   </div>
