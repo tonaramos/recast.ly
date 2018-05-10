@@ -7,10 +7,10 @@ var App = (props) => (
     </nav>
     <div className="row">
       <div className="col-md-7">
-        <VideoPlayer />
+        <VideoPlayer video={props.data[0]} />
       </div>
       <div className="col-md-5">
-        <VideoList videos={props.data.slice(-1)} />
+        <VideoList videos={props.data} />
       </div>
     </div>
   </div>
