@@ -3,41 +3,56 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      videoData: this.props.data,
-      videoPlaying: this.props.data[0]
+      // videoData: this.props.data,
+      // videoPlaying: this.props.data[0]
+      videoData: [],
+      videoPlaying: {}
     };
   }
   
   handleClick(video) {
     console.log(video);
-    this.setState({ videoPlaying: video});
+    this.setState({ videoPlaying: video });
     
   }
 
   handleSearch(query) {
     this.props.youtubeData({
+      format: '5',
       key: window.YOUTUBE_API_KEY,
       maxResults: '5',
       part: 'snippet',
-      q: query
-    }, (data) => this.setState({ videoData: data }) );
+      q: query,
+      type: 'video',
+      videoSyndicated: 'any'
+    }, (data) => this.setState({ videoData: data, videoPlaying: data[0] }) 
+    );
   }
 
   render() {
+    
+    let searchComponent = null;
+    let videoPlayerComponent = null;
+    let videoListComponent = null;
+    if ( this.state.videoData.length > 0 ) {
+      searchComponent = <Search youtubeData={this.props.youtubeData} onClick={(query) => this.handleSearch(query)} />;
+      videoPlayerComponent = <VideoPlayer video={this.state.videoPlaying} />;
+      videoListComponent = <VideoList videos={this.state.videoData} onClick={(video) => this.handleClick(video)} />;
+    }
+
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search youtubeData={this.props.youtubeData} onClick={(query) => this.handleSearch(query)} />
+            {searchComponent}
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.videoPlaying} />
+            {videoPlayerComponent}
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoData} onClick={(video) => this.handleClick(video)} />
-            
+            {videoListComponent}
           </div>
         </div>
       </div>
