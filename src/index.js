@@ -1,2 +1,1 @@
-// TODO: Render the `App` component to the DOM
-ReactDOM.render(<App data={window.exampleVideoData} />, document.getElementById('app'));
+ReactDOM.render(<App data={searchYouTube} />, document.getElementById('app'));

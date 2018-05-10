@@ -2,6 +2,8 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     
+    console.log('Props', this.props.data);
+
     this.state = {
       videoData: this.props.data,
       videoPlaying: this.props.data[0]
